@@ -1,0 +1,50 @@
+body{
+    background-color: #ffe600;
+    margin: 0;
+}
+
+#coluna{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    column-gap: 50px;
+    margin-left: 50px;
+    align-items: center;
+}
+
+.logo{
+    width: 600px;
+    height: 450px;
+    margin: 100px 0 100px;
+}
+
+#bloco_login{
+    background-color: #eceaea;
+    width: 85%;
+    height: 550px;
+    margin: 60px 0 60px 0;
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 20px;
+    box-shadow: 0 2px #8c8c8c;
+}
+
+#icones{
+    display: flex;
+    margin-left: 60px;
+    float: left;
+    gap: 100px;
+}
+
+.icone{
+    width: 70px;
+    border-radius: 100%;
+    background-color: #fff;
+}
+form{
+    display: flex;
+    
+}
+input{
+    width: 300px;
+}
