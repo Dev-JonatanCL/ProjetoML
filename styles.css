@@ -36,8 +36,7 @@ h2{
 #bloco_login{
     background-color: #eceaea;
     width: 80%;
-    height: 80%;
-    margin-top: 50px;
+    height: 85%;
     text-align: center;
     border-style: solid;
     border-width: 2px;
@@ -45,17 +44,25 @@ h2{
     box-shadow: 0 2px #8c8c8c;
 }
 
-#icones{
-    display: flex;
-    justify-content: space-around;
-}
-
 .icone{
     width: 12%;
     border-radius: 100%;
+    border-style: solid;
+    border-color: #eceaea;
     background-color: #fff;
-    margin-bottom: -10px;
+    margin: 0 9% -3%;
 }
+
+#social-media a{
+    transition: .5s;
+}
+
+#social-media a :hover{
+    border-color: #ffe600;
+    color: #ffe600;
+    border-style: solid;
+}
+
 form{
     display: flex;
     flex-direction: column;
@@ -71,18 +78,31 @@ p{
 
 input{
     display: flex;
-    height: 45px;
+    height: 55px;
     border-radius: 15px;
     font-size: 20px;
     padding-left: 20px;
-    
+    border: none;
+    outline: none;
 }
+
+::placeholder{
+    color: #cccccc;
+}
+
 label{
     margin-bottom: 8px;
     margin-top: 10px;
 }
 
-a{
+.span-required{
+    font-size: 12px;
+    margin: 3px 0 0 10px;
+    color: red;
+    display: none;
+}
+
+.link{
     color: #3483FA;
     font-size: 18px;
     text-decoration: none;
@@ -94,13 +114,14 @@ a{
     margin-left: 36%;
     margin-top: 20px;
     width: 28%;
-    height: 55px;
+    height: 60px;
     justify-content: center;
     padding: 0;
     font-size: 30px;
     background-color: #3483FA;
     color: #fff;
     cursor: pointer;
+    border: none;
 }
 
 footer{

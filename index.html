@@ -11,24 +11,81 @@
         <img class="logo" src="https://s2.glbimg.com/Bu6upvmSg6SRv0za635uXphThKo=/620x430/e.glbimg.com/og/ed/f/original/2020/03/28/mercado-livre.jpg" alt="logo">
         <div id="bloco_login">
             <h1>Entre com suas redes sociais</h1>
-            <div id="icones">
-                <img class="icone" src="https://foroalfa.org/imagenes/ilustraciones/3184.jpg" alt="Google">
-                <img class="icone" src="https://cdn-icons-png.freepik.com/512/2496/2496095.png" alt="Facebook">
-                <img class="icone" src="https://e7.pngegg.com/pngimages/123/106/png-clipart-apple-logo-logo-apple-icon-information-apple-logo-logo-monochrome-thumbnail.png" alt="Aplle">
+            <div id="social-media">
+                <a href="https://accounts.google.com/o/oauth2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile"><img class="icone" src="https://foroalfa.org/imagenes/ilustraciones/3184.jpg" alt="Google"></a>
+                <a href="https://www.facebook.com/v11.0/dialog/oauth?client_id=SEU_CLIENT_ID&redirect_uri=SUA_URL_DE_REDIRECT&scope=email"><img class="icone" src="https://cdn-icons-png.freepik.com/512/2496/2496095.png" alt="Facebook"></a>
+                <a href="https://appleid.apple.com/auth/authorize?client_id=SEU_CLIENT_ID&redirect_uri=SUA_URL_DE_REDIRECT&response_type=code id_token&scope=email%20name"><img class="icone" src="https://e7.pngegg.com/pngimages/123/106/png-clipart-apple-logo-logo-apple-icon-information-apple-logo-logo-monochrome-thumbnail.png" alt="Aplle"></a>
             </div>
-            <p style="font-size: 25px; height: 0;">———————————— ou ————————————</p>
+            <p style="font-size: 25px; height: 0;">——————————— ou ———————————</p>
             <h2>Digite o seu e-mail e senha</h2>
-            <form>
+            <form id="form" action="#" method="post">
                 <label for="email">&emsp;E-mail</label>
-                <input type="email" id="email" name="email" placeholder="seu_email@gmail.com"/>
-                <label for="senha">&emsp;Senha</label>
-                <input type="password" id="senha" name="senha" placeholder="************"/>
-                <a href=""><b>&emsp;Esqueci minha senha</b></a>
+                <input type="email" id="email" class="inputs required" name="email" placeholder="seu_email@gmail.com" oninput="emailValidate()"/>      
+                <span class="span-required">Digite um email válido</span>
+
+                <label for="password">&emsp;Senha</label>
+                <input type="password" id="password" class="inputs required" placeholder="∗∗∗∗∗∗∗∗∗∗∗∗" oninput="mainPasswordValidate()"/>
+                <span class="span-required">Digite uma senha com no mínimo 8 caracteres</span>
+                <a class="link" href=""><b>&emsp;Esqueci minha senha</b></a>
                 <input id="botao" type="submit" value="Entrar">
             </form>
-            <p><b>Não tem uma conta?<a href=""> Crie a sua</a></b></p>
+            <p><b>Não tem uma conta?<a class="link" href=""> Crie a sua</a></b></p>
         </div>
     </div>
     <footer>Copyright &copy; 1999-2024</footer>
 </body>
+<script>
+    const form   = document.getElementById('form');
+    const campos = document.querySelectorAll('.required');
+    const spans  = document.querySelectorAll('.span-required');
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    form.addEventListener('submit', (event) => {
+    if (!emailRegex.test(campos[0].value)) {
+        setError(0);
+        event.preventDefault(); 
+    } else {
+        removeError(0);
+    }
+
+
+    if (campos[1].value.length < 8) {
+        setError(1);
+        event.preventDefault(); 
+    } else {
+        removeError(1);
+    }
+    });
+
+    function setError(index){
+        campos[index].style.border = '2px solid #e63636';
+        spans[index].style.display = 'block';
+    }
+
+    function removeError(index){
+        campos[index].style.border = '';
+        spans[index].style.display = 'none';
+    }
+
+    function emailValidate(){
+        if(!emailRegex.test(campos[0].value))
+        {
+            setError(0);
+        }
+        else
+        {
+            removeError(0);
+        }
+    }
+    function mainPasswordValidate(){
+        if(campos[1].value.length < 8)
+        {
+            setError(1);
+        }
+        else
+        {
+            removeError(1);
+        }
+    }
+</script>
 </html>
