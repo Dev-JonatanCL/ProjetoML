@@ -1,42 +1,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kdam+Thmor+Pro&display=swap');
 
-body{
+*{
     margin: 0;
     padding: 0;
     list-style: none;
     text-decoration: none;
+}
+
+body{
     background-color: #ffe600;
     font-family: "Inter", sans-serif;
 }
 
-#coluna{
+#column{
     display: grid;
     grid-template-columns: repeat(2,1fr);
     column-gap: 200px;
-    margin-left: 50px;
     align-items: center;
 }
 
 .logo{
-    width: 90%;
-    height: 70%;
+    width: 100%;
     margin: 150px 120px 150px;
 }
 
 h1{
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 400;
+    margin-top: 15px;
 }
 h2{
-    font-size: 36px;
+    font-size: 28px;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
-#bloco_login{
+#block_login{
     background-color: #eceaea;
-    width: 80%;
-    height: 85%;
+    width: 85%;
+    height: 80%;
     text-align: center;
     border-style: solid;
     border-width: 2px;
@@ -44,18 +46,17 @@ h2{
     box-shadow: 0 2px #8c8c8c;
 }
 
-.icone{
+.icon{
     width: 12%;
     border-radius: 100%;
     border-style: solid;
     border-color: #eceaea;
     background-color: #fff;
-    margin: 0 9% -3%;
+    margin: 15px 9% 5px;
 }
 
 #div{
-    font-size: 25px;
-    height: 0;
+    font-size: 120%;
 }
 
 #social-media a{
@@ -74,17 +75,17 @@ form{
     width: 94%;
     margin-left: 3%;
     text-align: left;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 p{
-    font-size: 20px;
+    font-size: 16px;
 }
 
 input{
     display: flex;
-    height: 55px;
-    border-radius: 15px;
+    height: 50px;
+    border-radius: 18px;
     font-size: 20px;
     padding-left: 20px;
     border: none;
@@ -109,20 +110,19 @@ label{
 
 .link{
     color: #3483FA;
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
     margin-top: 10px;
 }
 
-#botao{
+#button{
     display: flex;
-    margin-left: 36%;
-    margin-top: 20px;
-    width: 28%;
-    height: 60px;
+    margin: 25px 0 20px 36%;
+    width: 30%;
+    height: 53px;
     justify-content: center;
     padding: 0;
-    font-size: 30px;
+    font-size: 28px;
     background-color: #3483FA;
     color: #fff;
     cursor: pointer;
@@ -140,38 +140,40 @@ footer{
     display: flex;
 }
 
-@media(max-width: 640px){
+@media(max-width: 425px)   
+{
 
-    #coluna{
+    #column{
         display: flex;
         flex-direction: column;
         margin: 0;
     }
     
     .logo{
-        width: 70%;
+        width: 50%;
         margin: 0;
     }
     
     h1{
-        font-size: 25px;
+        font-size: 20px;
     }
 
     h2{
-        font-size: 25px;
+        margin-top: 15px;
+        font-size: 20px;
     }
     
-    #bloco_login{
-        width: 93%;
-        height: 550px;
+    #block_login{
+        width: 80%;
+        height: 520px;
     }
 
-    .icone{
-        width: 13%;
+    .icon{
+        width: 12%;
     }
 
     #div{
-        font-size: 15px;
+        font-size: 12px;
     }
 
     form{
@@ -183,7 +185,6 @@ footer{
     }
     
     input{
-        display: flex;
         height: 45px;
         font-size: 17px;
     }
@@ -192,7 +193,71 @@ footer{
         font-size: 15px;
     }
     
-    #botao{
+    #button{
+        margin: 25px auto 10px;
+        width: 30%;
+        height: 45px;
+        font-size: 18px;
+    } 
+}
+
+@media screen and 
+(min-width: 426px) and
+(max-width: 768px)
+{
+
+    #column{
+        display: flex;
+        flex-direction: column;
+        margin: 0 60px 0 60px;
+    }
+    
+    .logo{
+        width: 35%;
+        margin: 0;
+    }
+    
+    h1{
+        font-size: 25px;
+    }
+
+    h2{
+        font-size: 25px;
+    }
+    
+    #block_login{
+        width: 80%;
+        height: 550px;
+        margin-bottom: 0;
+    }
+
+    .icon{
+        width: 11%;
+    }
+
+    #div{
+        font-size: 18px;
+    }
+
+    form{
+        font-size: 15px;
+    }
+    
+    p{
+        font-size: 15px;
+    }
+    
+    input{
+        height: 45px;
+        font-size: 17px;
+    }
+    
+    .link{
+        font-size: 15px;
+    }
+    
+    #button{
+        margin-top: 30px;
         width: 28%;
         height: 50px;
         font-size: 20px;
