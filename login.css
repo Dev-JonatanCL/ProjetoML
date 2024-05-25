@@ -53,6 +53,11 @@ h2{
     margin: 0 9% -3%;
 }
 
+#div{
+    font-size: 25px;
+    height: 0;
+}
+
 #social-media a{
     transition: .5s;
 }
@@ -133,4 +138,63 @@ footer{
     align-items: center;
     justify-content: space-around;
     display: flex;
+}
+
+@media(max-width: 640px){
+
+    #coluna{
+        display: flex;
+        flex-direction: column;
+        margin: 0;
+    }
+    
+    .logo{
+        width: 70%;
+        margin: 0;
+    }
+    
+    h1{
+        font-size: 25px;
+    }
+
+    h2{
+        font-size: 25px;
+    }
+    
+    #bloco_login{
+        width: 93%;
+        height: 550px;
+    }
+
+    .icone{
+        width: 13%;
+    }
+
+    #div{
+        font-size: 15px;
+    }
+
+    form{
+        font-size: 15px;
+    }
+    
+    p{
+        font-size: 15px;
+    }
+    
+    input{
+        display: flex;
+        height: 45px;
+        font-size: 17px;
+    }
+    
+    .link{
+        font-size: 15px;
+    }
+    
+    #botao{
+        width: 28%;
+        height: 50px;
+        font-size: 20px;
+    } 
 }

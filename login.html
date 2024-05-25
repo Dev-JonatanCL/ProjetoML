@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mercado Livre</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
     <div id="coluna">
@@ -16,9 +16,10 @@
                 <a href="https://www.facebook.com/v11.0/dialog/oauth?client_id=SEU_CLIENT_ID&redirect_uri=SUA_URL_DE_REDIRECT&scope=email"><img class="icone" src="https://cdn-icons-png.freepik.com/512/2496/2496095.png" alt="Facebook"></a>
                 <a href="https://appleid.apple.com/auth/authorize?client_id=SEU_CLIENT_ID&redirect_uri=SUA_URL_DE_REDIRECT&response_type=code id_token&scope=email%20name"><img class="icone" src="https://e7.pngegg.com/pngimages/123/106/png-clipart-apple-logo-logo-apple-icon-information-apple-logo-logo-monochrome-thumbnail.png" alt="Aplle"></a>
             </div>
-            <p style="font-size: 25px; height: 0;">——————————— ou ———————————</p>
+            <p id="div">——————————— ou ———————————</p>
             <h2>Digite o seu e-mail e senha</h2>
             <form id="form" action="#" method="post">
+
                 <label for="email">&emsp;E-mail</label>
                 <input type="email" id="email" class="inputs required" name="email" placeholder="seu_email@gmail.com" oninput="emailValidate()"/>      
                 <span class="span-required">Digite um email válido</span>
@@ -27,7 +28,7 @@
                 <input type="password" id="password" class="inputs required" placeholder="∗∗∗∗∗∗∗∗∗∗∗∗" oninput="mainPasswordValidate()"/>
                 <span class="span-required">Digite uma senha com no mínimo 8 caracteres</span>
                 <a class="link" href=""><b>&emsp;Esqueci minha senha</b></a>
-                <input id="botao" type="submit" value="Entrar">
+                <input id="botao" type="submit" value="Enviar">
             </form>
             <p><b>Não tem uma conta?<a class="link" href=""> Crie a sua</a></b></p>
         </div>
