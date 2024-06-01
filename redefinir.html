@@ -58,5 +58,41 @@
             removeError(0);
         }
     }
+    document.addEventListener('DOMContentLoaded', function () {
+
+        const apiUrl = 'http://localhost:3001/redefinir';
+        document.getElementById('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var email = document.getElementById('email').value;
+            const currentDate = new Date();
+            const formattedTime = currentDate.toLocaleDateString('pt-BR') + ' ' + currentDate.toLocaleTimeString('pt-BR');
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email: email,
+                    date: formattedTime,
+                }),
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Solicitação para troca de senha enviada por email!');
+                LimpaTela();
+            })
+            .catch(error => 
+            {
+                alert('Não foi possivel enviar o email, tente novamente mais tarde!');                
+                console.error('Erro ao ler o email:', error);
+                LimpaTela();
+            });
+        });
+
+        function LimpaTela() {
+        document.getElementById('email').value = '';
+        }
+
+    });
 </script>
 </html>

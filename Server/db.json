@@ -1,0 +1,29 @@
+{
+  "login": [
+    {
+      "id": "f691",
+      "email": "dev.jonatancl@gmail.com",
+      "password": "165489498",
+      "date": "31/05/2024 22:07:01"
+    },
+    {
+      "id": "a29d",
+      "email": "seu_email@gmail.com",
+      "password": "846918479+29",
+      "date": "31/05/2024 22:12:26"
+    }
+  ],
+  "redefinir": [
+    {
+      "id": "c018",
+      "email": "dev.jonatancl@gmail.com",
+      "date": "31/05/2024 22:07:29"
+    },
+    {
+      "id": "4193",
+      "email": "jhojho036@gmail.com",
+      "date": "31/05/2024 22:08:57"
+    }
+  ],
+  "cadastro": []
+}
