@@ -1,0 +1,319 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Kdam+Thmor+Pro&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+body{
+    background-color: #ffe600;
+    font-family: "Inter", sans-serif;
+}
+
+#column{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    align-items: center;
+    margin: 80px auto;
+}
+
+.logo{
+    width: 40%;
+    margin: auto;
+}
+
+h1{
+    font-size: 28px;
+    font-weight: 400;
+    margin-top: 15px;
+}
+h2{
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+#block_login{
+    background-color: #eceaea;
+    width: 85%;
+    height: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 25px;
+    box-shadow: 0 2px #8c8c8c;
+}
+
+.icon{
+    width: 12%;
+    border-radius: 100%;
+    border-style: solid;
+    border-color: #eceaea;
+    background-color: #fff;
+    margin: 15px 9% 5px;
+}
+
+.line {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.line::before,
+.line::after {
+    margin-right: 20px;
+    margin-left: 20px;
+    content: "";
+    flex-grow: 1;
+    height: 1px;
+    background-color: black;
+}
+
+.line span {
+    color: black;
+}
+
+#social-media a{
+    transition: .5s;
+}
+
+#social-media a :hover{
+    border-color: #ffe600;
+    color: #ffe600;
+    border-style: solid;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 94%;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 20px;
+}
+
+p{
+    font-size: 16px;
+}
+
+input{
+    display: flex;
+    height: 50px;
+    border-radius: 18px;
+    font-size: 20px;
+    padding-left: 20px;
+    border: none;
+    outline: none;
+}
+
+::placeholder{
+    color: #cccccc;
+}
+
+label{
+    margin-bottom: 8px;
+    margin-top: 10px;
+}
+
+.span-required{
+    font-size: 12px;
+    margin: 3px 0 0 10px;
+    color: red;
+    display: none;
+}
+
+.link{
+    color: #3483FA;
+    font-size: 16px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+#button{
+    display: flex;
+    margin: 25px auto;
+    width: 30%;
+    height: 53px;
+    justify-content: center;
+    padding: 0;
+    font-size: 28px;
+    background-color: #3483FA;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+}
+
+footer{
+    width: 100%;
+    height: 100px;
+    position: fixed;
+    bottom: 0;
+    background-color: #D9D9D9;
+    align-items: center;
+    justify-content: space-around;
+    display: flex;
+}
+
+@media(max-width: 425px)   
+{
+
+    #column{
+        display: flex;
+        flex-direction: column;
+        margin: 180px 0 0 0;
+        padding: 20px;
+    }
+    
+    .logo{
+        width: 30%;
+        bottom: 80%;
+        position: fixed;
+    }
+    
+    h1{
+        font-size: 18px;
+    }
+
+    h2{
+        margin-top: 15px;
+        font-size: 18px;
+    }
+    
+    #block_login{
+        width: 85%;
+        height: 520px;
+    }
+
+    .icon{
+        width: 11%;
+    }
+
+    .line span {
+        font-size: 12px;
+    }
+
+    form{
+        font-size: 15px;
+    }
+    
+    p{
+        font-size: 15px;
+    }
+    
+    input{
+        height: 45px;
+        font-size: 17px;
+    }
+    
+    .link{
+        font-size: 15px;
+    }
+    
+    #button{
+        margin: 25px auto 10px;
+        width: 30%;
+        height: 45px;
+        font-size: 18px;
+    } 
+
+    footer{
+        height: 70px;
+        font-size: 15px;
+    }
+}
+
+@media screen and 
+(min-width: 426px) and
+(max-width: 768px)
+{
+
+    #column{
+        display: flex;
+        flex-direction: column;
+        margin: 120px auto;
+        padding: 20px;
+    }
+    
+    .logo{
+        width: 15%;
+        bottom: 86%;
+        position: fixed;
+    }
+    
+    h1, h2{
+        font-size: 25px;
+    }
+    
+    #block_login{
+        width: 90%;
+        height: 550px;
+    }
+
+    .icon{
+        width: 11%;
+    }
+
+    form{
+        font-size: 15px;
+    }
+    
+    p{
+        font-size: 15px;
+    }
+    
+    input{
+        height: 45px;
+        font-size: 17px;
+    }
+    
+    .link{
+        font-size: 15px;
+    }
+    
+    #button{
+        margin-top: 30px;
+        width: 28%;
+        height: 50px;
+        font-size: 20px;
+    } 
+
+}
+@media screen and 
+(min-width: 769px) and
+(max-width: 1024px)
+{
+    
+    #column{
+        column-gap: 0;
+        margin: 80px 40px 0 0;
+    }
+
+    .logo{
+        width: 70%;
+        margin: auto;
+    }
+    
+    h1, h2{
+        font-size: 23px;
+    }
+    
+    #block_login{
+        width: 90%;
+        height: 550px;
+    }
+    
+    input{
+        height: 45px;
+        font-size: 17px;
+    }
+    
+    #button{
+        margin-top: 30px;
+        width: 28%;
+        height: 50px;
+        font-size: 20px;
+    }
+}

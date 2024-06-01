@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercado Livre</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div id="column">
+        <img class="logo" src="./Images/mercado-livre.jpg" alt="logo">
+        <div id="block_login">
+            <h1>Criar conta</h1>
+            <form id="form" action="#" method="post" onsubmit="return validarFormulario()">
+                <label for="full-name">&emsp;Nome Completo</label>
+                <input type="text" id="full-name" class="inputs required" name="full-name" autocomplete="name" placeholder="Seu Nome Completo"/>
+
+                <label for="email">&emsp;E-mail</label>
+                <input type="email" id="email" class="inputs required" name="email" autocomplete="email" placeholder="seu_email@gmail.com" oninput="emailValidate()"/>      
+                <span class="span-required email-error">Digite um email válido</span>
+
+                <label for="username">&emsp;Nome de Usuário</label>
+                <input type="text" id="username" class="inputs required" name="username" autocomplete="username" placeholder="Seu Nome de Usuário"/>
+
+                <label for="password">&emsp;Crie uma senha</label>
+                <input type="password" id="password1" class="inputs required" placeholder="∗∗∗∗∗∗∗∗∗∗∗∗" oninput="mainPasswordValidate()"/>
+                <span class="span-required password-error">Digite uma senha com no mínimo 8 caracteres</span>
+
+                <label for="confirm-password">&emsp;Insira a senha novamente</label>
+                <input type="password" id="password2" class="inputs required" placeholder="∗∗∗∗∗∗∗∗∗∗∗∗" oninput="confirmPasswordValidate()"/>
+                <span class="span-required confirm-password-error">As senhas não são iguais</span>
+
+                <input id="button" type="submit" value="Criar conta">
+            </form>
+            <p><b>Já tem uma conta?<a class="link" href="./login.html"> Faça login na sua conta</a></b></p>
+        </div>
+    </div>
+    <footer>Copyright &copy; 1999-2024</footer>
+</body>
+<script>
+    const form   = document.getElementById('form');
+    const campos = document.querySelectorAll('.required');
+    const spans  = document.querySelectorAll('.span-required');
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+    form.addEventListener('submit', (event) => {
+        if (!emailRegex.test(campos[1].value)) {
+            setError(1, 'email-error');
+            event.preventDefault(); 
+        } else {
+            removeError(1, 'email-error');
+        }
+
+        if (campos[3].value.length < 8) {
+            setError(3, 'password-error');
+            event.preventDefault(); 
+        } else {
+            removeError(3, 'password-error');
+        }
+
+        if (campos[3].value !== campos[4].value) {
+            setError(4, 'confirm-password-error');
+            event.preventDefault(); 
+        } else {
+            removeError(4, 'confirm-password-error');
+        }
+    });
+
+    function setError(index, errorClass){
+        campos[index].style.border = '2px solid #e63636';
+        document.querySelector(`.${errorClass}`).style.display = 'block';
+    }
+
+    function removeError(index, errorClass){
+        campos[index].style.border = '';
+        document.querySelector(`.${errorClass}`).style.display = 'none';
+    }
+
+    function emailValidate(){
+        if(!emailRegex.test(campos[1].value))
+        {
+            setError(1, 'email-error');
+        }
+        else
+        {
+            removeError(1, 'email-error');
+        }
+    }
+
+    function mainPasswordValidate(){
+        if(campos[3].value.length < 8)
+        {
+            setError(3, 'password-error');
+        }
+        else
+        {
+            removeError(3, 'password-error');
+        }
+    }
+
+    function confirmPasswordValidate(){
+        if(campos[3].value !== campos[4].value)
+        {
+            setError(4, 'confirm-password-error');
+        }
+        else
+        {
+            removeError(4, 'confirm-password-error');
+        }
+    }
+</script>
+</html>
+
+
