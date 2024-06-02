@@ -24,48 +24,49 @@
     <footer>Copyright &copy; 1999-2024</footer>
 </body>
 <script>
-    const form   = document.getElementById('form');
-    const campos = document.querySelectorAll('.required');
-    const spans  = document.querySelectorAll('.span-required');
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    form.addEventListener('submit', (event) => {
-    if (!emailRegex.test(campos[0].value)) {
-        setError(0);
-        event.preventDefault(); 
-    } else {
-        removeError(0);
-    }
-    });
-
-    function setError(index){
-        campos[index].style.border = '2px solid #e63636';
-        spans[index].style.display = 'block';
-    }
-
-    function removeError(index){
-        campos[index].style.border = '';
-        spans[index].style.display = 'none';
-    }
-
-    function emailValidate(){
-        if(!emailRegex.test(campos[0].value))
-        {
-            setError(0);
-        }
-        else
-        {
-            removeError(0);
-        }
-    }
     document.addEventListener('DOMContentLoaded', function () {
-
         const apiUrl = 'http://localhost:3001/redefinir';
-        document.getElementById('form').addEventListener('submit', function (event) {
+
+        const form = document.getElementById('form');
+        const emailInput = document.getElementById('email');
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
-            var email = document.getElementById('email').value;
+            
+            if (validateForm()) {
+                sendRedefinitionData();
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+
+            if (!emailRegex.test(emailInput.value)) {
+                setError(emailInput, 0);
+                isValid = false;
+            } else {
+                removeError(emailInput, 0);
+            }
+
+            return isValid;
+        }
+
+        function setError(input, index) {
+            input.style.border = '2px solid #e63636';
+            document.querySelectorAll('.span-required')[index].style.display = 'block';
+        }
+
+        function removeError(input, index) {
+            input.style.border = '';
+            document.querySelectorAll('.span-required')[index].style.display = 'none';
+        }
+
+        function sendRedefinitionData() {
+            var email = emailInput.value;
             const currentDate = new Date();
             const formattedTime = currentDate.toLocaleDateString('pt-BR') + ' ' + currentDate.toLocaleTimeString('pt-BR');
+
             fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -87,10 +88,20 @@
                 console.error('Erro ao ler o email:', error);
                 LimpaTela();
             });
-        });
+        }
 
         function LimpaTela() {
-        document.getElementById('email').value = '';
+            emailInput.value = '';
+        }
+
+        emailInput.addEventListener('input', emailValidate);
+
+        function emailValidate() {
+            if (!emailRegex.test(emailInput.value)) {
+                setError(emailInput, 0);
+            } else {
+                removeError(emailInput, 0);
+            }
         }
 
     });
