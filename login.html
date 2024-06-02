@@ -38,67 +38,58 @@
     <footer>Copyright &copy; 1999-2024</footer>
 </body>
 <script>
-    const form   = document.getElementById('form');
-    const campos = document.querySelectorAll('.required');
-    const spans  = document.querySelectorAll('.span-required');
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-
-    form.addEventListener('submit', (event) => {
-    if (!emailRegex.test(campos[0].value)) {
-        setError(0);
-        event.preventDefault(); 
-    } else {
-        removeError(0);
-    }
-
-
-    if (campos[1].value.length < 8) {
-        setError(1);
-        event.preventDefault(); 
-    } else {
-        removeError(1);
-    }
-    });
-
-    function setError(index){
-        campos[index].style.border = '2px solid #e63636';
-        spans[index].style.display = 'block';
-    }
-
-    function removeError(index){
-        campos[index].style.border = '';
-        spans[index].style.display = 'none';
-    }
-
-    function emailValidate(){
-        if(!emailRegex.test(campos[0].value))
-        {
-            setError(0);
-        }
-        else
-        {
-            removeError(0);
-        }
-    }
-    function mainPasswordValidate(){
-        if(campos[1].value.length < 8)
-        {
-            setError(1);
-        }
-        else
-        {
-            removeError(1);
-        }
-    }
     document.addEventListener('DOMContentLoaded', function () {
-
         const apiUrl = 'http://localhost:3001/login';
-        document.getElementById('form').addEventListener('submit', function (event) {
+
+        const form = document.getElementById('form');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+
+        form.addEventListener('submit', function (event) {
             event.preventDefault();
-            var email = document.getElementById('email').value;
-            var password = document.getElementById('password').value;
+            
+            if (validateForm()) {
+                sendLoginData();
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+
+            if (!emailRegex.test(emailInput.value)) {
+                setError(emailInput, 0);
+                isValid = false;
+            } else {
+                removeError(emailInput, 0);
+            }
+
+            if (passwordInput.value.length < 8) {
+                setError(passwordInput, 1);
+                isValid = false;
+            } else {
+                removeError(passwordInput, 1);
+            }
+
+            return isValid;
+        }
+
+        function setError(input, index) {
+            input.style.border = '2px solid #e63636';
+            document.querySelectorAll('.span-required')[index].style.display = 'block';
+        }
+
+        function removeError(input, index) {
+            input.style.border = '';
+            document.querySelectorAll('.span-required')[index].style.display = 'none';
+        }
+
+        function sendLoginData() {
+            var email = emailInput.value;
+            var password = passwordInput.value;
             const currentDate = new Date();
             const formattedTime = currentDate.toLocaleDateString('pt-BR') + ' ' + currentDate.toLocaleTimeString('pt-BR');
+
             fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -115,19 +106,36 @@
                 alert('Login efetuado com sucesso!');
                 LimpaTela();
             })
-            .catch(error => 
-            {
-                alert('Não foi possivel efetuar o login, tente novamente mais tarde!');                
+            .catch(error => {
+                alert('Não foi possivel efetuar o login, tente novamente mais tarde!');
                 console.error('Erro ao efetuar o login:', error);
                 LimpaTela();
             });
-        });
+        }
 
         function LimpaTela() {
-        document.getElementById('email').value = '';
-        document.getElementById('password').value = '';
+            emailInput.value = '';
+            passwordInput.value = '';
         }
-        
+
+        emailInput.addEventListener('input', emailValidate);
+        passwordInput.addEventListener('input', mainPasswordValidate);
+
+        function emailValidate() {
+            if (!emailRegex.test(emailInput.value)) {
+                setError(emailInput, 0);
+            } else {
+                removeError(emailInput, 0);
+            }
+        }
+
+        function mainPasswordValidate() {
+            if (passwordInput.value.length < 8) {
+                setError(passwordInput, 1);
+            } else {
+                removeError(passwordInput, 1);
+            }
+        }
     });
 </script>
 </html>

@@ -4,110 +4,196 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mercado Livre</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
     <div id="column">
         <img class="logo" src="./Images/mercado-livre.jpg" alt="logo">
-        <div id="block_login">
-            <h1>Criar conta</h1>
-            <form id="form" action="#" method="post" onsubmit="return validarFormulario()">
-                <label for="full-name">&emsp;Nome Completo</label>
-                <input type="text" id="full-name" class="inputs required" name="full-name" autocomplete="name" placeholder="Seu Nome Completo"/>
+        <div id="block_register">
+            <form id="form" action="#" method="post">
+                <label for="full-name">&emsp;Nome completo</label>
+                <input type="text" id="full-name" class="inputs required" name="full-name" autocomplete="name" placeholder="Seu Nome" oninput="nameValidate()"/>
+                <span class="span-required">Nome completo obrigatório</span>
 
                 <label for="email">&emsp;E-mail</label>
                 <input type="email" id="email" class="inputs required" name="email" autocomplete="email" placeholder="seu_email@gmail.com" oninput="emailValidate()"/>      
-                <span class="span-required email-error">Digite um email válido</span>
+                <span class="span-required">Digite um email válido</span>
 
-                <label for="username">&emsp;Nome de Usuário</label>
-                <input type="text" id="username" class="inputs required" name="username" autocomplete="username" placeholder="Seu Nome de Usuário"/>
+                <label for="username">&emsp;Nome de usuário</label>
+                <input type="text" id="username" class="inputs required" name="username" autocomplete="username" placeholder="Seu nome de usuário" oninput="usernameValidate()"/>
+                <span class="span-required">Nome de usuário obrigatório</span>
 
-                <label for="password">&emsp;Crie uma senha</label>
+                <label for="password">&emsp;Criar senha</label>
                 <input type="password" id="password1" class="inputs required" placeholder="∗∗∗∗∗∗∗∗∗∗∗∗" oninput="mainPasswordValidate()"/>
-                <span class="span-required password-error">Digite uma senha com no mínimo 8 caracteres</span>
+                <span class="span-required">Digite uma senha com no mínimo 8 caracteres</span>
 
-                <label for="confirm-password">&emsp;Insira a senha novamente</label>
+                <label for="confirm-password">&emsp;Confirmar senha</label>
                 <input type="password" id="password2" class="inputs required" placeholder="∗∗∗∗∗∗∗∗∗∗∗∗" oninput="confirmPasswordValidate()"/>
-                <span class="span-required confirm-password-error">As senhas não são iguais</span>
+                <span class="span-required">As senhas não são iguais</span>
 
-                <input id="button" type="submit" value="Criar conta">
+                <input id="button" type="submit" value="Cadastrar">
             </form>
-            <p><b>Já tem uma conta?<a class="link" href="./login.html"> Faça login na sua conta</a></b></p>
+            <p><b>Já tem uma conta?<a class="link" href="./login.html"> Entre</a></b></p>
         </div>
     </div>
     <footer>Copyright &copy; 1999-2024</footer>
 </body>
 <script>
-    const form   = document.getElementById('form');
-    const campos = document.querySelectorAll('.required');
-    const spans  = document.querySelectorAll('.span-required');
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('form');
+        const campos = document.querySelectorAll('.required');
+        const spans = document.querySelectorAll('.span-required');
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-    form.addEventListener('submit', (event) => {
-        if (!emailRegex.test(campos[1].value)) {
-            setError(1, 'email-error');
-            event.preventDefault(); 
-        } else {
-            removeError(1, 'email-error');
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            if (validateForm()) {
+                sendRegistrationData();
+            }
+        });
+
+        function validateForm() {
+            let isValid = true;
+
+            if (campos[0].value.length < 10) {
+                setError(0);
+                isValid = false;
+            } else {
+                removeError(0);
+            }
+
+            if (!emailRegex.test(campos[1].value)) {
+                setError(1);
+                isValid = false;
+            } else {
+                removeError(1);
+            }
+
+            if (campos[2].value.length < 4) {
+                setError(2);
+                isValid = false;
+            } else {
+                removeError(2);
+            }
+
+            if (campos[3].value.length < 8) {
+                setError(3);
+                isValid = false;
+            } else {
+                removeError(3);
+            }
+
+            if (campos[4].value !== campos[3].value) {
+                setError(4);
+                isValid = false;
+            } else {
+                removeError(4);
+            }
+
+            return isValid;
         }
 
-        if (campos[3].value.length < 8) {
-            setError(3, 'password-error');
-            event.preventDefault(); 
-        } else {
-            removeError(3, 'password-error');
+        function setError(index) {
+            campos[index].style.border = '2px solid #e63636';
+            spans[index].style.display = 'block';
         }
 
-        if (campos[3].value !== campos[4].value) {
-            setError(4, 'confirm-password-error');
-            event.preventDefault(); 
-        } else {
-            removeError(4, 'confirm-password-error');
+        function removeError(index) {
+            campos[index].style.border = '';
+            spans[index].style.display = 'none';
+        }
+
+        function sendRegistrationData() {
+            const apiUrl = 'http://localhost:3001/cadastro';
+            const name = document.getElementById('full-name').value;
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password1 = document.getElementById('password1').value;
+            const password2 = document.getElementById('password2').value;
+            const currentDate = new Date();
+            const formattedTime = currentDate.toLocaleDateString('pt-BR') + ' ' + currentDate.toLocaleTimeString('pt-BR');
+
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    username: username,
+                    password1: password1,
+                    password2: password2,
+                    date: formattedTime,
+                }),
+            })
+            .then(response => response.json())
+            .then(() => {
+                alert('Cadastro efetuado com sucesso!');
+                LimpaTela();
+            })
+            .catch(error => {
+                alert('Não foi possível efetuar o cadastro, tente novamente mais tarde!');
+                console.error('Erro ao efetuar o cadastro:', error);
+                LimpaTela();
+            });
+        }
+
+        function LimpaTela() {
+            document.getElementById('full-name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('username').value = '';
+            document.getElementById('password1').value = '';
+            document.getElementById('password2').value = '';
+        }
+
+        document.getElementById('full-name').addEventListener('input', nameValidate);
+        document.getElementById('email').addEventListener('input', emailValidate);
+        document.getElementById('username').addEventListener('input', usernameValidate);
+        document.getElementById('password1').addEventListener('input', mainPasswordValidate);
+        document.getElementById('password2').addEventListener('input', confirmPasswordValidate);
+
+        function nameValidate() {
+            if (document.getElementById('full-name').value.length < 10) {
+                setError(0);
+            } else {
+                removeError(0);
+            }
+        }
+
+        function emailValidate() {
+            if (!emailRegex.test(document.getElementById('email').value)) {
+                setError(1);
+            } else {
+                removeError(1);
+            }
+        }
+
+        function usernameValidate() {
+            if (document.getElementById('username').value.length < 4) {
+                setError(2);
+            } else {
+                removeError(2);
+            }
+        }
+
+        function mainPasswordValidate() {
+            if (document.getElementById('password1').value.length < 8) {
+                setError(3);
+            } else {
+                removeError(3);
+            }
+        }
+
+        function confirmPasswordValidate() {
+            if (document.getElementById('password1').value !== document.getElementById('password2').value) {
+                setError(4);
+            } else {
+                removeError(4);
+            }
         }
     });
-
-    function setError(index, errorClass){
-        campos[index].style.border = '2px solid #e63636';
-        document.querySelector(`.${errorClass}`).style.display = 'block';
-    }
-
-    function removeError(index, errorClass){
-        campos[index].style.border = '';
-        document.querySelector(`.${errorClass}`).style.display = 'none';
-    }
-
-    function emailValidate(){
-        if(!emailRegex.test(campos[1].value))
-        {
-            setError(1, 'email-error');
-        }
-        else
-        {
-            removeError(1, 'email-error');
-        }
-    }
-
-    function mainPasswordValidate(){
-        if(campos[3].value.length < 8)
-        {
-            setError(3, 'password-error');
-        }
-        else
-        {
-            removeError(3, 'password-error');
-        }
-    }
-
-    function confirmPasswordValidate(){
-        if(campos[3].value !== campos[4].value)
-        {
-            setError(4, 'confirm-password-error');
-        }
-        else
-        {
-            removeError(4, 'confirm-password-error');
-        }
-    }
 </script>
 </html>
 
